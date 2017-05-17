@@ -1,6 +1,6 @@
 # PoolManager for Unity
-
-# Scripting
+PoolManager implements an object pool in Unity.
+# Scripting (May, 2017)
 First, add "MackySoft" to using area.
 ```cs
 using MackySoft;
