@@ -32,6 +32,11 @@ namespace MackySoft {
 				pool.FindPropertyRelative("prepareCount").intValue = 0;
 				pool.FindPropertyRelative("_Interval").floatValue = 1;
 			};
+			l_poolList.onRemoveCallback = list => {
+				if (EditorApplication.isPlaying)
+					PoolManager.RemovePool(PoolManager.Instance[list.index].Prefab);
+				poolList.DeleteArrayElementAtIndex(list.index);
+			};
 		}
 
 		public override void OnInspectorGUI () {
