@@ -37,3 +37,5 @@ Destroy(pooledObject);//NO NO NO
 
 pooledGameObject.SetActive(false);//OK with this!
 ```
+# Credits
+- [新・オブジェクトプール](http://tsubakit1.hateblo.jp/entry/20140309/1394296581)
