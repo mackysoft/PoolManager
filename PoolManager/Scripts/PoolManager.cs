@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace MackySoft {
 	
+	[HelpURL("https://github.com/MackySoft/Unity_PoolManager.git")]
 	public class PoolManager : MonoBehaviour {
 
 		#region Variables
