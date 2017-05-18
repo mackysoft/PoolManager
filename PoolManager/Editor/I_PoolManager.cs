@@ -35,7 +35,8 @@ namespace MackySoft {
 			l_poolList.onRemoveCallback = list => {
 				if (EditorApplication.isPlaying)
 					PoolManager.RemovePool(PoolManager.Instance[list.index].Prefab);
-				poolList.DeleteArrayElementAtIndex(list.index);
+				else
+					poolList.DeleteArrayElementAtIndex(list.index);
 			};
 		}
 
