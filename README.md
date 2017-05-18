@@ -10,9 +10,9 @@ You can obtain the pool in either of the following ways.
 
 "GetPoolSafe" automatically add a pool if there is no pool.
 ```cs
-PoolManager.Insance[prefab];
+Pool pool = PoolManager.Insance[prefab];
 
-PoolManager.GetPoolSafe(prefab);
+Pool pool = PoolManager.GetPoolSafe(prefab);
 ```
 
 Or you can use it by caching in the following way.
