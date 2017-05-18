@@ -2,6 +2,8 @@
 PoolManager implements an object pool in Unity.
 
 ![Inspector_NotPlaying](https://cdn-ak.f.st-hatena.com/images/fotolife/M/MackySoft/20170517/20170517181308.jpg)
+# Environment
+Unity 5.6.0f3
 # Scripting (May, 2017)
 First, add "MackySoft" to using area.
 ```cs
