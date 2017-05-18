@@ -10,8 +10,7 @@ First, add "MackySoft" to using area.
 using MackySoft;
 ```
 ## Get Pool
-You can obtain the pool in either of the following ways.
-
+You can obtain the pool in either of the following ways.  
 "GetPoolSafe" automatically add a pool if there is no pool.
 ```cs
 Pool pool = PoolManager.Insance[prefab];
@@ -42,8 +41,7 @@ Destroy(pooledObject);//NO NO NO
 pooledGameObject.SetActive(false);//OK with this!
 ```
 # Inspector
-During playback, the number of pooled objects is displayed.
-
+During playback, the number of pooled objects is displayed.  
 Also, you can not change prefabs and add pools from inspector.
 
 ![Inspector_Playing](https://cdn-ak.f.st-hatena.com/images/fotolife/M/MackySoft/20170517/20170517181344.jpg)
