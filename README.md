@@ -46,6 +46,7 @@ Also, you can not change prefabs and add pools from inspector.
 
 ![Inspector_Playing](https://cdn-ak.f.st-hatena.com/images/fotolife/M/MackySoft/20170517/20170517181344.jpg)
 # Links
+- [Video](https://youtu.be/n9iQ2-71HdE)
 - [Twitter](https://twitter.com/macky_soft)
 - [オブジェクトプール](http://mackysoft.hatenablog.com/entry/2017/05/18/210000)
 # Credits
