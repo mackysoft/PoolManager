@@ -3,17 +3,20 @@ PoolManager implements an object pool in Unity.
 
 ![Inspector_NotPlaying](https://cdn-ak.f.st-hatena.com/images/fotolife/M/MackySoft/20170517/20170517181308.jpg)
 # Environment
-Unity 5.6.0f3
-# Scripting (May, 2017)
+Unity 2017.1.0f3
+# Scripting (July, 2017)
 First, add "MackySoft" to using area.
 ```cs
 using MackySoft;
 ```
 ## Get Pool
 You can obtain the pool in either of the following ways.  
-"GetPoolSafe" automatically add a pool if there is no pool.
+"GetPoolSafe" automatically add a pool if there is no pool.  
+(PoolManager.Instance [prefab] and PoolManager.GetPool (prefab) are the same.)
 ```cs
 Pool pool = PoolManager.Insance[prefab];
+
+Pool pool = PoolManager.GetPool(prefab);
 
 Pool pool = PoolManager.GetPoolSafe(prefab);
 ```
