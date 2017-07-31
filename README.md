@@ -1,18 +1,21 @@
 # PoolManager for Unity
 PoolManager implements an object pool in Unity.
+
+![Inspector_NotPlaying](https://cdn-ak.f.st-hatena.com/images/fotolife/M/MackySoft/20170517/20170517181308.jpg)
+# Environment
+Unity 5.6.0f3
 # Scripting (May, 2017)
 First, add "MackySoft" to using area.
 ```cs
 using MackySoft;
 ```
 ## Get Pool
-You can obtain the pool in either of the following ways.
-
+You can obtain the pool in either of the following ways.  
 "GetPoolSafe" automatically add a pool if there is no pool.
 ```cs
-PoolManager.Insance[prefab];
+Pool pool = PoolManager.Insance[prefab];
 
-PoolManager.GetPoolSafe(prefab);
+Pool pool = PoolManager.GetPoolSafe(prefab);
 ```
 
 Or you can use it by caching in the following way.
@@ -37,5 +40,14 @@ Destroy(pooledObject);//NO NO NO
 
 pooledGameObject.SetActive(false);//OK with this!
 ```
+# Inspector
+During playback, the number of pooled objects is displayed.  
+Also, you can not change prefabs and add pools from inspector.
+
+![Inspector_Playing](https://cdn-ak.f.st-hatena.com/images/fotolife/M/MackySoft/20170517/20170517181344.jpg)
+# Links
+- [Video](https://youtu.be/n9iQ2-71HdE)
+- [Twitter](https://twitter.com/macky_soft)
+- [オブジェクトプール](http://mackysoft.hatenablog.com/entry/2017/05/18/210000)
 # Credits
 - [新・オブジェクトプール](http://tsubakit1.hateblo.jp/entry/20140309/1394296581)
