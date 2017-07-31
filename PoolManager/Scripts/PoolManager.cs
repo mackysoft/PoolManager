@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace MackySoft {
 	
+	/// <summary>
+	/// A component that manages the <see cref="Pool"/>.
+	/// </summary>
 	[HelpURL("https://github.com/MackySoft/Unity_PoolManager.git")]
 	public class PoolManager : MonoBehaviour {
 
@@ -48,10 +51,11 @@ namespace MackySoft {
 		}
 		
 		/// <summary>
-		/// Get a pool with the specified prefab.
+		/// <para> Get a pool with the specified prefab. </para>
+		/// <para> See also: <see cref="GetPool(GameObject)"/> </para>
 		/// </summary>
 		public Pool this[GameObject prefab] {
-			get { return pools[prefab]; }
+			get { return GetPool(prefab); }
 		}
 
 		#endregion
@@ -105,6 +109,19 @@ namespace MackySoft {
 			if (!prefab)
 				throw new ArgumentNullException("prefab");
 			return HasPool(prefab) ? Instance[prefab] : AddPool(prefab,maxCount,prepareCount,interval);
+		}
+
+		/// <summary>
+		/// <para> Returns the specified prefab pool. </para>
+		/// <para> If not has pool, throw <see cref="PoolException"/>. </para>
+		/// </summary>
+		/// <param name="prefab"> Prefab of pool to get. </param>
+		public static Pool GetPool (GameObject prefab) {
+			if (!prefab)
+				throw new ArgumentNullException("prefab");
+			if (!HasPool(prefab))
+				throw new PoolException(string.Format("\"{0}\" pool does not exist.",prefab.name));
+			return Instance.pools[prefab];
 		}
 		
 		/// <summary>
