@@ -12,6 +12,8 @@ namespace MackySoft {
 	public class PoolManager : MonoBehaviour {
 
 		#region Variables
+
+		private static bool isQuitting = false;
 		
 		[SerializeField]
 		private List<Pool> poolList = new List<Pool>();
@@ -80,15 +82,19 @@ namespace MackySoft {
 		}
 
 		private void OnDestroy () {
+			if (isQuitting) return;
 			for (int i = 0;Count > i;i++)
 				RemovePool(this[i].Prefab);
 		}
 
+		private void OnApplicationQuit () {
+			isQuitting = true;
+		}
+
 #if UNITY_EDITOR
 		private void OnValidate () {
-			for (int i = 0;Count > i;i++) {
+			for (int i = 0;Count > i;i++)
 				this[i].Interval = this[i].Interval;
-			}
 		}
 #endif
 
@@ -108,7 +114,7 @@ namespace MackySoft {
 		public static Pool GetPoolSafe (GameObject prefab,int maxCount = 0,int prepareCount = 0,float interval = 1) {
 			if (!prefab)
 				throw new ArgumentNullException("prefab");
-			return HasPool(prefab) ? Instance[prefab] : AddPool(prefab,maxCount,prepareCount,interval);
+			return HasPool(prefab) ? GetPool(prefab) : AddPool(prefab,maxCount,prepareCount,interval);
 		}
 
 		/// <summary>
