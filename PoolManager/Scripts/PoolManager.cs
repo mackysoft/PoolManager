@@ -84,7 +84,7 @@ namespace MackySoft {
 		private void OnDestroy () {
 			if (isQuitting) return;
 			for (int i = 0;Count > i;i++)
-				RemovePool(this[i].Prefab);
+				RemovePool(this[i].Prefab,true);
 		}
 
 		private void OnApplicationQuit () {
@@ -162,7 +162,7 @@ namespace MackySoft {
 		/// </summary>
 		/// <param name="prefab"> Prefab of the pool to remove. </param>
 		/// <param name="destroyObjects"> Whether the destroy pooled objects. </param>
-		public static void RemovePool (GameObject prefab,bool destroyObjects = true) {
+		public static void RemovePool (GameObject prefab,bool destroyObjects) {
 			if (!prefab)
 				throw new ArgumentNullException("prefab");
 			if (!HasPool(prefab))
