@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEditor;
 using UnityEditorInternal;
 
-namespace MackySoft {
+namespace MackySoft.Pooling {
 
 	[CustomEditor(typeof(PoolManager))]
 	public class I_PoolManager : Editor {

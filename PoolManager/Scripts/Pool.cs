@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace MackySoft {
+namespace MackySoft.Pooling {
 	
 	[Serializable]
 	public class Pool {
@@ -53,7 +53,7 @@ namespace MackySoft {
 		/// </summary>
 		public float Interval {
 			get { return _Interval; }
-			set { _Interval = Mathf.Clamp(value,0.1f,value); }
+			set { _Interval = Mathf.Max(0.1f,value); }
 		}
 
 		/// <summary>
@@ -132,6 +132,55 @@ namespace MackySoft {
 			return null;
 		}
 
+		public GameObject Get (out bool isNewInstance,Transform parent = null) {
+			pooled.RemoveAll(o => !o);
+
+			for (int i = 0;Count > i;i++) {
+				if (!pooled[i].activeSelf) {
+					pooled[i].transform.SetParent(parent);
+					pooled[i].SetActive(true);
+					isNewInstance = false;
+					return pooled[i];	
+				}
+			}
+		
+			if (maxCount <= 0 || Count < maxCount) {
+				GameObject obj = GameObject.Instantiate(Prefab,parent);
+				obj.SetActive(true);
+				pooled.Add(obj);
+				isNewInstance = true;
+				return obj;
+			} else {
+				isNewInstance = false;
+				return null;
+			}
+		}
+
+		public GameObject Get (out bool isNewInstance,Vector3 position,Quaternion rotation,Transform parent = null) {
+			pooled.RemoveAll(o => !o);
+
+			for (int i = 0;Count > i;i++) {
+				if (!pooled[i].activeSelf) {
+					pooled[i].transform.SetPositionAndRotation(position,rotation);
+					pooled[i].transform.SetParent(parent);
+					pooled[i].SetActive(true);
+					isNewInstance = false;
+					return pooled[i];	
+				}
+			}
+		
+			if (maxCount <= 0 || Count < maxCount) {
+				GameObject obj = GameObject.Instantiate(Prefab,position,rotation,parent);
+				obj.SetActive(true);
+				pooled.Add(obj);
+				isNewInstance = true;
+				return obj;
+			} else {
+				isNewInstance = false;
+				return null;
+			}
+		}
+
 		/// <summary>
 		/// Get the attached component of instance.
 		/// </summary>
@@ -151,6 +200,26 @@ namespace MackySoft {
 			GameObject ins = Get(parent);
 			return ins ? ins.GetComponent<T>() : null;
 		}
+
+		/// <summary>
+		/// Get the attached component of instance.
+		/// </summary>
+		/// <param name="position"> Position for the instance. </param>
+		/// <param name="rotation"> Orientation of the instance. </param>
+		/// <param name="parent"> Parent that will be assigned to instance. </param>
+		public T Get<T> (out bool isNewInstance,Vector3 position,Quaternion rotation,Transform parent = null) where T : Component {
+			GameObject ins = Get(out isNewInstance,position,rotation,parent);
+			return ins ? ins.GetComponent<T>() : null;
+		}
+
+		/// <summary>
+		/// Get the attached component of instance.
+		/// </summary>
+		/// <param name="parent"> Parent that will be assigned to instance. </param>
+		public T Get<T> (out bool isNewInstance,Transform parent = null) where T : Component {
+			GameObject ins = Get(out isNewInstance,parent);
+			return ins ? ins.GetComponent<T>() : null;
+		}
 		
 		/// <summary>
 		/// Call <see cref="RemoveObject(int)"/> every <see cref="Interval"/> seconds.
@@ -158,7 +227,7 @@ namespace MackySoft {
 		public IEnumerator RemoveCoroutine () {
 			while (true) {
 				RemoveObject(prepareCount);
-				yield return new WaitForSeconds(Interval);
+				yield return new WaitForSeconds(_Interval);
 			}
 		}
 		

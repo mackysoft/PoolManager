@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-namespace MackySoft {
+namespace MackySoft.Pooling {
 
 	[CustomPropertyDrawer(typeof(Pool))]
 	public class D_Pool : PropertyDrawer {

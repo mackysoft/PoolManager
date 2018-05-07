@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace MackySoft {
+namespace MackySoft.Pooling {
 	
 	/// <summary>
 	/// A component that manages the <see cref="Pool"/>.
@@ -31,7 +31,7 @@ namespace MackySoft {
 				if (!_Instance) {
 					_Instance = FindObjectOfType<PoolManager>();
 					if (!_Instance)
-						_Instance = _Instance = new GameObject("Pool Manager").AddComponent<PoolManager>();
+						_Instance = _Instance = new GameObject("PoolManager").AddComponent<PoolManager>();
 				}
 				return _Instance;
 			}
@@ -139,6 +139,14 @@ namespace MackySoft {
 		}
 
 		/// <summary>
+		/// Whether the specified pool exists.
+		/// </summary>
+		/// <param name="pool"> Pool to check. </param>
+		public static bool HasPool (Pool pool) {
+			return pool != null && Instance.poolList.Contains(pool);
+		}
+
+		/// <summary>
 		/// Add a new pool by specified prefab.
 		/// </summary>
 		/// <param name="prefab"> <see cref="Pool.Prefab"/> for the new pool. </param>
@@ -173,6 +181,24 @@ namespace MackySoft {
 
 			Instance.poolList.Remove(Instance[prefab]);
 			Instance.pools.Remove(prefab);
+		}
+
+		/// <summary>
+		/// Remove a pool.
+		/// </summary>
+		/// <param name="pool"> Pool to remove. </param>
+		/// <param name="destroyObjects"> Whether the destroy pooled objects. </param>
+		public static void RemovePool (Pool pool,bool destroyObjects) {
+			if (pool == null)
+				throw new ArgumentNullException("pool");
+			if (!HasPool(pool))
+				throw new PoolException("Pool does not exist.");
+
+			if (destroyObjects)
+				pool.DestroyObjects();
+
+			Instance.poolList.Remove(pool);
+			Instance.pools.Remove(pool.Prefab);
 		}
 
 	}
