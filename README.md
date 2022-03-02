@@ -1,3 +1,7 @@
+**This library is a legacy. A more advanced object pooling system is available [here](https://github.com/mackysoft/XPool).**
+
+XPool: https://github.com/mackysoft/XPool
+
 # PoolManager for Unity
 PoolManager implements an object pool in Unity.
 
